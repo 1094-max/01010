@@ -1,0 +1,31 @@
+<button onclick="startInfiniteWindows()">무한 새 창 열기</button>
+
+<script>
+function startInfiniteWindows() {
+  let count = 0;
+
+  function openWindow() {
+    const newWindow = window.open(
+      'https://example.com', // URL
+      '_blank', // 새 창
+      'width=800,height=600,toolbar=no,menubar=no,scrollbars=no,resizable=yes'
+    );
+
+    if (newWindow) {
+      // 전체화면 설정 시도
+      newWindow.moveTo(0, 0);
+      newWindow.resizeTo(screen.width, screen.height);
+      count++;
+
+      // 일정 시간 후 다시 실행
+      if (count < 100) { // 100개로 제한
+        setTimeout(openWindow, 100); // 100ms 간격으로 실행
+      }
+    } else {
+      alert('팝업 차단이 활성화되어 창을 열 수 없습니다.');
+    }
+  }
+
+  openWindow(); // 첫 번째 창 열기
+}
+</script>
